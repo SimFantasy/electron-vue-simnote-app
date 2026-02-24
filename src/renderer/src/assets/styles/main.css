@@ -1,0 +1,264 @@
+@import 'tailwindcss';
+@import '@nuxt/ui';
+
+@import './transition';
+
+@import 'tw-animate-css';
+
+/**
+ * 暗色模式变体定义
+ * 支持 .dark 类名切换暗色模式
+ */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/**
+ * 主题颜色系统
+ * 定义设计系统的颜色变量和布局变量
+ */
+@theme {
+  /* 基础颜色 */
+  --color-background: var(--color-white);
+  --color-foreground: var(--color-stone-900);
+
+  /* 卡片颜色 */
+  --color-card: var(--color-white);
+  --color-card-foreground: var(--color-stone-900);
+
+  /* 边框和输入框颜色 */
+  --color-border: var(--color-stone-200);
+  --color-input: var(--color-stone-200);
+  --color-ring: var(--color-stone-400);
+
+  /* 圆角系统 */
+  --radius: 0.5rem;
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  /* 布局间距系统 */
+  --spacing: 4px;
+
+  /* 字体系统 */
+  --font-sans: 'Public Sans', sans-serif;
+}
+
+/**
+ * 暗色模式主题
+ */
+@layer theme {
+  .dark {
+    --color-background: var(--color-zinc-950);
+    --color-foreground: var(--color-zinc-50);
+    --color-card: var(--color-zinc-950);
+    --color-card-foreground: var(--color-zinc-50);
+    --color-border: var(--color-zinc-800);
+    --color-input: var(--color-zinc-800);
+    --color-ring: var(--color-zinc-300);
+  }
+}
+
+/**
+* 自定义颜色系统
+*/
+@theme {
+  /* Geek Blue*/
+  --color-geek-blue-50: #f5f8ff;
+  --color-geek-blue-100: #e2ebff;
+  --color-geek-blue-200: #c0d3ff;
+  --color-geek-blue-300: #9cb8ff;
+  --color-geek-blue-400: #799cff;
+  --color-geek-blue-500: #587efa;
+  --color-geek-blue-600: #4767d3;
+  --color-geek-blue-700: #3953a8;
+  --color-geek-blue-800: #2f448b;
+  --color-geek-blue-900: #1d2c5d;
+  --color-geek-blue-950: #0d173b;
+
+  /* Light Green */
+  --color-light-green-50: #effdf5;
+  --color-light-green-100: #d9fbe8;
+  --color-light-green-200: #b3f5d1;
+  --color-light-green-300: #75edae;
+  --color-light-green-400: #00dc82;
+  --color-light-green-500: #00c16a;
+  --color-light-green-600: #00a155;
+  --color-light-green-700: #007f45;
+  --color-light-green-800: #016538;
+  --color-light-green-900: #0a5331;
+  --color-light-green-950: #052e16;
+}
+
+/**
+* 自定义变量
+*/
+@theme {
+  --layout-header-height: calc(var(--spacing) * 12);
+  --layout-sidebar-left-width: calc(var(--spacing) * 60);
+  --laytout-sidebar-right-width: calc(var(--spacing) * 80);
+}
+
+/**
+ * 自定义滚动条样式
+ */
+::-webkit-scrollbar {
+  @apply w-1;
+}
+::-webkit-scrollbar-track {
+  @apply bg-stone-100!;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-stone-300 rounded-sm hover:bg-stone-400;
+}
+
+/**
+ * 基础样式层
+ */
+@layer base {
+  *,
+  ::before,
+  ::after {
+    border-color: var(--color-border);
+  }
+
+  html {
+    @apply h-full scroll-smooth hover:scroll-auto;
+  }
+
+  body {
+    @apply h-full bg-transparent! text-stone-500 overflow-hidden;
+  }
+
+  #app {
+    @apply h-full;
+  }
+}
+
+/**
+ * 组件样式层
+ */
+@layer components {
+  /* 页面布局组件 */
+  .page-wrapper {
+    @apply flex-center size-full;
+  }
+  .page-container {
+    @apply mx-auto px-4 w-full max-w-full lg:px-0 lg:max-w-5xl xl:max-w-6xl 2xl:max-w-7xl;
+  }
+  .page-main {
+    @apply flex flex-col gap-4;
+  }
+  .page-block {
+    @apply flex flex-col gap-y-4;
+  }
+
+  /* 公共组件 */
+  .size-auto {
+    @apply size-auto;
+  }
+
+  /* 窗体拖拽 */
+  .drag {
+    -webkit-app-region: drag;
+  }
+
+  .nodrag,
+  input,
+  select,
+  textarea,
+  option {
+    -webkit-app-region: no-drag;
+  }
+}
+
+/* Components reset styles */
+@utility free-button {
+  @apply px-2!;
+}
+
+/* Common utility styles */
+/* Flex */
+@utility flex-start {
+  @apply flex items-center;
+}
+@utility flex-center {
+  @apply flex items-center justify-center;
+}
+@utility flex-end {
+  @apply flex items-center justify-end;
+}
+@utility flex-x-1 {
+  @apply flex items-center gap-x-1;
+}
+@utility flex-x-2 {
+  @apply flex items-center gap-x-2;
+}
+@utility flex-x-3 {
+  @apply flex items-center gap-x-3;
+}
+@utility flex-x-4 {
+  @apply flex items-center gap-x-4;
+}
+@utility flex-x-5 {
+  @apply flex items-center gap-x-5;
+}
+@utility flex-x-6 {
+  @apply flex items-center gap-x-6;
+}
+@utility flex-y {
+  @apply flex flex-col;
+}
+@utility flex-y-1 {
+  @apply flex flex-col gap-y-1;
+}
+@utility flex-y-2 {
+  @apply flex flex-col gap-y-2;
+}
+@utility flex-y-3 {
+  @apply flex flex-col gap-y-3;
+}
+@utility flex-y-4 {
+  @apply flex flex-col gap-y-4;
+}
+@utility flex-y-5 {
+  @apply flex flex-col gap-y-5;
+}
+@utility flex-y-6 {
+  @apply flex flex-col gap-y-6;
+}
+@utility flex-y-8 {
+  @apply flex flex-col gap-y-8;
+}
+@utility flex-y-16 {
+  @apply flex flex-col gap-y-16;
+}
+@utility flex-y-24 {
+  @apply flex flex-col gap-y-24;
+}
+
+/* Transitions */
+@utility trans-all {
+  @apply transition-all duration-300 ease-linear;
+}
+@utility trans-colors {
+  @apply transition-colors duration-300 ease-linear;
+}
+@utility trans-shadow {
+  @apply transition-shadow duration-300 ease-linear;
+}
+@utility trans-transform {
+  @apply transition-transform duration-300 ease-linear;
+}
+
+/* Custom Animation */
+@theme {
+  --animate-rounder: rounder 0.3s ease-in-out;
+
+  @keyframes rounder {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(60deg);
+    }
+  }
+}
